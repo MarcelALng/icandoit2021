@@ -3,9 +3,9 @@ import 'package:flutter/foundation.dart';
 enum unity_challenge { kg, km }
 
 class ChallengeModel {
-  String name;
-  int target;
-  unity_challenge unity;
+  final String name;
+  final int target;
+  final unity_challenge unity;
 
   ChallengeModel({
     @required this.name,
@@ -13,5 +13,12 @@ class ChallengeModel {
     @required this.unity,
   });
 
-  Map<String, dynamic> maMap = {"banane": "jaune"};
+  ChallengeModel.fromJSON(Map<String, dynamic> json)
+      : name = json['name'],
+        target = json['target'],
+        unity = json['unity'];
+
+  Map<String, dynamic> toJSON() {
+    return {"name": name, "target": target, "unity": unity.toString()};
+  }
 }
