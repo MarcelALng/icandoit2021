@@ -8,6 +8,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final GlobalKey<ScaffoldState> scaffoldKey =
       GlobalKey(); // key which can be use in all application
+  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +34,27 @@ class _HomeState extends State<Home> {
   PersistentBottomSheetController buildBottomSheet() {
     return scaffoldKey.currentState.showBottomSheet((builder) {
       return Container(
-        alignment: Alignment.center,
-        height: 300,
-        child: Text("Hello 안녕"),
-      );
+          alignment: Alignment.center,
+          height: MediaQuery.of(context).size.height *
+              0.4, // take height from the device
+          child: Form(
+            // each form need one KEY
+            key: formkey,
+            child: ListView(
+              children: <Widget>[
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "Nom du Challenge ",
+                  ),
+                ),
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "objectif",
+                  ),
+                ),
+              ],
+            ),
+          ));
     });
   }
 }
