@@ -40,19 +40,26 @@ class _HomeState extends State<Home> {
           child: Form(
             // each form need one KEY
             key: formkey,
-            child: ListView(
-              children: <Widget>[
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: "Nom du Challenge ",
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: ListView(
+                children: <Widget>[
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: "Nom du Challenge ",
+                    ),
                   ),
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: "objectif",
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: "objectif",
+                    ),
                   ),
-                ),
-              ],
+                  RaisedButton(
+                    onPressed: () {},
+                    child: Text("Ajouter challenge"),
+                  ),
+                ],
+              ),
             ),
           ));
     });
