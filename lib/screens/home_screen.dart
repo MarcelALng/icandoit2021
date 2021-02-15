@@ -10,7 +10,7 @@ class _HomeState extends State<Home> {
       GlobalKey(); // key which can be use in all application
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
-final String unityChallege = "KG",
+ String unityChallege = "KG",
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ final String unityChallege = "KG",
     );
   }
 
-  PersistentBottomSheetController buildBottomSheet() {
+  FloatingActionButton buildBottomSheet() { // change to floatingActionButton
     return scaffoldKey.currentState.showBottomSheet((builder) {
       return Container(
           alignment: Alignment.center,
