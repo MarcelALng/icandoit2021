@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
       return Container(
           alignment: Alignment.center,
           height: MediaQuery.of(context).size.height *
-              0.4, // take height from the device
+              0.5, // take height from the device
           child: Form(
             // each form need one KEY
             key: formkey,
@@ -54,6 +54,19 @@ class _HomeState extends State<Home> {
                       labelText: "objectif",
                     ),
                   ),
+                  DropdownButtonFormField(
+                    onChanged: (value) {},
+                    items: <DropdownMenuItem>[
+                      DropdownMenuItem(
+                        value: "KG",
+                        child: Text("Kg"),
+                      ),
+                      DropdownMenuItem(
+                        value: "Km",
+                        child: Text("Km"),
+                      ),
+                    ],
+                  ), // liste deroulante
                   RaisedButton(
                     onPressed: () {},
                     child: Text("Ajouter challenge"),
