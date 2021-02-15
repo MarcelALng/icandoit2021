@@ -63,8 +63,12 @@ class _HomeState extends State<Home> {
                     ),
                     DropdownButtonFormField(
                       value: unityChallenge,
-                      onChanged: (value) {},
-                      onSaved: (value) {},
+                      onChanged: (value) {
+                        updateController(value);
+                      },
+                      onSaved: (value) {
+                        updateController(value);
+                      },
                       items: <DropdownMenuItem>[
                         DropdownMenuItem(
                           value: "KG",
