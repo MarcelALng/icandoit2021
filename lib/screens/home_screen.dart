@@ -57,6 +57,7 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     TextFormField(
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         labelText: "Objectif",
                       ),
