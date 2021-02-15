@@ -10,6 +10,8 @@ class _HomeState extends State<Home> {
       GlobalKey(); // key which can be use in all application
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
+final String unityChallege = "KG",
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +57,12 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   DropdownButtonFormField(
-                    onChanged: (value) {},
+                    value: unityChallenge,
+                    onChanged: (value) {
+                      setState(() {
+                        unityChallenge = value;
+                      });
+                    },
                     items: <DropdownMenuItem>[
                       DropdownMenuItem(
                         value: "KG",
