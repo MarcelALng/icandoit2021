@@ -52,6 +52,12 @@ class _HomeState extends State<Home> {
                 child: ListView(
                   children: <Widget>[
                     TextFormField(
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return "Merci d'entrer un nom pour le challenge";
+                        }
+                        return null;
+                      },
                       decoration: InputDecoration(
                         labelText: "Nom du Challenge ",
                       ),
