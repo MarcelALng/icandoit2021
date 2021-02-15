@@ -7,10 +7,10 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final GlobalKey<ScaffoldState> scaffoldKey =
-      GlobalKey(); // key which can be use in all application
+      GlobalKey<ScaffoldState>(); // key which can be use in all application
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
-
- String unityChallege = "KG",
+  PersistentBottomSheetController _bottomSheetController;
+  String unityChallenge = "KG";
 
   @override
   Widget build(BuildContext context) {
@@ -23,65 +23,71 @@ class _HomeState extends State<Home> {
       ),
       backgroundColor: Color(0xff414a4c),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.orange[700],
-        onPressed: () {
-          buildBottomSheet();
-        },
-        child: Icon(Icons.add),
-      ),
+      floatingActionButton: buildBottomSheet(),
     );
   }
 
-  FloatingActionButton buildBottomSheet() { // change to floatingActionButton
-    return scaffoldKey.currentState.showBottomSheet((builder) {
-      return Container(
-          alignment: Alignment.center,
-          height: MediaQuery.of(context).size.height *
-              0.5, // take height from the device
-          child: Form(
-            // each form need one KEY
-            key: formkey,
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ListView(
-                children: <Widget>[
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: "Nom du Challenge ",
-                    ),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: "objectif",
-                    ),
-                  ),
-                  DropdownButtonFormField(
-                    value: unityChallenge,
-                    onChanged: (value) {
-                      setState(() {
-                        unityChallenge = value;
-                      });
-                    },
-                    items: <DropdownMenuItem>[
-                      DropdownMenuItem(
-                        value: "KG",
-                        child: Text("Kg"),
+  updateController(dynamic value) {
+    _bottomSheetController.setState(() {
+      unityChallenge = value;
+    });
+  }
+
+  FloatingActionButton buildBottomSheet() {
+    // change to floatingActionButton
+    return FloatingActionButton(
+      backgroundColor: Colors.orange[700],
+      onPressed: () {
+        _bottomSheetController =
+            scaffoldKey.currentState.showBottomSheet((context) {
+          return Container(
+            alignment: Alignment.center,
+            height: MediaQuery.of(context).size.height *
+                0.5, // take height from the device
+            child: Form(
+              // each form need one KEY
+              key: formkey,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: ListView(
+                  children: <Widget>[
+                    TextFormField(
+                      decoration: InputDecoration(
+                        labelText: "Nom du Challenge ",
                       ),
-                      DropdownMenuItem(
-                        value: "Km",
-                        child: Text("Km"),
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        labelText: "Objectif",
                       ),
-                    ],
-                  ), // liste deroulante
-                  RaisedButton(
-                    onPressed: () {},
-                    child: Text("Ajouter challenge"),
-                  ),
-                ],
+                    ),
+                    DropdownButtonFormField(
+                      value: unityChallenge,
+                      onChanged: (value) {},
+                      onSaved: (value) {},
+                      items: <DropdownMenuItem>[
+                        DropdownMenuItem(
+                          value: "KG",
+                          child: Text("Kg"),
+                        ),
+                        DropdownMenuItem(
+                          value: "Km",
+                          child: Text("Km"),
+                        ),
+                      ],
+                    ), // liste deroulante
+                    RaisedButton(
+                      onPressed: () {},
+                      child: Text("Ajouter challenge"),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ));
-    });
+          );
+        });
+      },
+      child: Icon(Icons.add),
+    );
   }
 }
