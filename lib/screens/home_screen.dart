@@ -53,8 +53,11 @@ class _HomeState extends State<Home> {
                   children: <Widget>[
                     TextFormField(
                       validator: (value) {
+                        final _isInt = int.tryParse(value);
                         if (value.isEmpty) {
                           return "Merci d'entrer un nom pour le challenge";
+                        } else if (_isInt != null) {
+                          return "$value";
                         }
                         return null;
                       },
@@ -63,6 +66,14 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     TextFormField(
+                      validator: (value) {
+                        final _isInt =
+                            int.tryParse(value); // convert value to int
+                        if (_isInt == null) {
+                          return "merci d'entrer uniquement des chiffres pour l'objectif";
+                        }
+                        return null;
+                      },
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         labelText: "Objectif",
@@ -88,7 +99,12 @@ class _HomeState extends State<Home> {
                       ],
                     ), // liste deroulante
                     RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (formkey.currentState.validate()) {
+                          // formkey.currentState.save();
+                        }
+                        ;
+                      },
                       child: Text("Ajouter challenge"),
                     ),
                   ],
