@@ -53,10 +53,10 @@ class _HomeState extends State<Home> {
                   children: <Widget>[
                     TextFormField(
                       validator: (value) {
-                        final _isInt = int.tryParse(value);
+                        final RegExp checkReg = RegExp(r'^\D+$');
                         if (value.isEmpty) {
                           return "Merci d'entrer un nom pour le challenge";
-                        } else if (_isInt != null) {
+                        } else if (!checkReg.hasMatch(value)) {
                           return "$value";
                         }
                         return null;
