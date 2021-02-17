@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'components/build_challenges_list.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -21,6 +23,7 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
+      body: ChallengeListBuilder(),
       backgroundColor: Color(0xff414a4c),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: buildBottomSheet(),
