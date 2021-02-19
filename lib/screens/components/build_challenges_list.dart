@@ -19,6 +19,18 @@ class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
       itemCount: _challengesList.length,
       itemBuilder: (context, index) {
         return Dismissible(
+          background: Container(
+            color: Colors.red,
+            padding: EdgeInsets.only(bottom: 10.0, left: 8.0, right: 8.0),
+            alignment: Alignment.centerLeft,
+            child: Icon(Icons.delete),
+          ),
+          secondaryBackground: Container(
+            padding: EdgeInsets.only(right: 20.0),
+            alignment: Alignment.centerRight,
+            color: Colors.green,
+            child: Icon(Icons.check),
+          ),
           key: Key(UniqueKey().toString()),
           child: Container(
             color: Colors.white,
@@ -39,7 +51,8 @@ class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
                     Text(_challengesList[index]
                         .unity
                         .toString()
-                        .replaceAll(unityPattern, "")),
+                        .replaceAll(unityPattern, "")
+                        .toUpperCase()),
                   ],
                 ),
               ),
