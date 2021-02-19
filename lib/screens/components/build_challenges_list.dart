@@ -19,6 +19,28 @@ class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
       itemCount: _challengesList.length,
       itemBuilder: (context, index) {
         return Dismissible(
+          confirmDismiss: (direction) {
+            if (direction == DismissDirection.startToEnd) {
+              showDialog(context:context,
+                builder :(context), 
+              { return AlertDialog(
+                title: Text("test title"),
+                content:
+                    Text("Etes-vous sur de vouloir supprimer le challenge?"),
+                actions: <Widget>[
+                  RaisedButton(
+                    onPressed: () {},
+                    child: Text("oui"),
+                  ),
+                  RaisedButton(
+                    onPressed: () {},
+                    child: Text("Non"),
+                  )
+                ],
+              );
+            });
+            }
+          },
           background: Container(
             color: Colors.red,
             padding: EdgeInsets.only(bottom: 10.0, left: 8.0, right: 8.0),
