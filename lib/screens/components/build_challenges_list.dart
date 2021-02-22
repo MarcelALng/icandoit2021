@@ -22,6 +22,7 @@ class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
           padding: const EdgeInsets.only(bottom: 3.0, left: 8.0, right: 8.0),
           child: Dismissible(
             confirmDismiss: (direction) async {
+              // to confirm delete or not
               if (direction == DismissDirection.startToEnd) {
                 final bool resultat = await showDialog<bool>(
                     context: context,
