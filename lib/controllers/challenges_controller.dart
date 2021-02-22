@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/challenge_model.dart';
 
 class ChallengesController {
@@ -18,9 +19,27 @@ class ChallengesController {
       ChallengeModel(
         name: name,
         target: int.parse(target),
-        unity: unity == "KG" ? unity_challenge.kg : unity_challenge.km,
+        unity: unity == "KG"
+            ? unity_challenge.kg
+            : unity_challenge.km, // ternary operator
       ),
-      // ternary operator
     );
+    final bool resultat = await _save(); // save data
+    if (resultat) {
+      print("ça marche");
+    } else {
+      print("ça bug $resultat");
+    }
+  }
+
+  Future<bool> _save() async {
+    SharedPreferences localData = await SharedPreferences.getInstance();
+    if (_challengesList.isNotEmpty) {
+      List<String> _jsonList = _challengesList.map((challenge) {
+        jsonEncode(challenge.toJSON());
+      }).toList();
+      return localData.setStringList("ChallengesList", _jsonList);
+    }
+    return false;
   }
 }
