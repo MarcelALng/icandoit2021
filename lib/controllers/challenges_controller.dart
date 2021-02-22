@@ -15,7 +15,12 @@ class ChallengesController {
       @required String target,
       @required String unity}) async {
     _challengesList.add(
-      ChallengeModel(name: name, target: int.parse(target), unity: unity),
+      ChallengeModel(
+        name: name,
+        target: int.parse(target),
+        unity: unity == "KG" ? unity_challenge.kg : unity_challenge.km,
+      ),
+      // ternary operator
     );
   }
 }
