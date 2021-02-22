@@ -30,6 +30,7 @@ class ChallengesController {
     } else {
       print("ça bug $resultat");
     }
+    return getChallenges();
   }
 
   Future<bool> _save() async {
