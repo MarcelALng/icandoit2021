@@ -39,6 +39,7 @@ class ChallengesController {
       List<String> _jsonList = _challengesList.map((challenge) {
         jsonEncode(challenge.toJSON());
       }).toList();
+      print(_jsonList);
       return localData.setStringList("ChallengesList", _jsonList);
     }
     return false;

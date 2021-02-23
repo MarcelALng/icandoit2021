@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'components/build_challenges_list.dart';
 
+import 'package:icandoit2021/controllers/challenges_controller.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -12,7 +14,10 @@ class _HomeState extends State<Home> {
       GlobalKey<ScaffoldState>(); // key which can be use in all application
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
   PersistentBottomSheetController _bottomSheetController;
+  ChallengesController _controller = ChallengesController();
   String unityChallenge = "KG";
+  String nameChallenge;
+  String targetChallenge;
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +60,9 @@ class _HomeState extends State<Home> {
                 child: ListView(
                   children: <Widget>[
                     TextFormField(
+                      onSaved: (value) {
+                        nameChallenge = value;
+                      },
                       validator: (value) {
                         final RegExp checkReg = RegExp(r'^\D+$');
                         if (value.isEmpty) {
@@ -69,6 +77,9 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     TextFormField(
+                      onSaved: (value) {
+                        targetChallenge = value;
+                      },
                       validator: (value) {
                         final _isInt =
                             int.tryParse(value); // convert value to int
@@ -104,7 +115,11 @@ class _HomeState extends State<Home> {
                     RaisedButton(
                       onPressed: () {
                         if (formkey.currentState.validate()) {
-                          // formkey.currentState.save();
+                          formkey.currentState.save();
+                          _controller.addChallenge(
+                              name: nameChallenge,
+                              target: targetChallenge,
+                              unity: unityChallenge);
                         }
                         ;
                       },
