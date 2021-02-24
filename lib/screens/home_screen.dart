@@ -14,10 +14,17 @@ class _HomeState extends State<Home> {
       GlobalKey<ScaffoldState>(); // key which can be use in all application
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
   PersistentBottomSheetController _bottomSheetController;
-  ChallengesController _controller = ChallengesController();
+  final ChallengesController _controller = ChallengesController();
+  Future<List> challengesData;
   String unityChallenge = "KG";
   String nameChallenge;
   String targetChallenge;
+
+  @override
+  void initState() {
+    challengesData = _controller.initChallengesList();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +35,10 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
-      body: ChallengeListBuilder(),
+      body: ChallengeListBuilder(
+        challengesData: challengesData,
+        controller: _controller,
+      ),
       backgroundColor: Color(0xff414a4c),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: buildBottomSheet(),

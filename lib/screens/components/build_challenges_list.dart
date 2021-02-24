@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
+
 import '../../models/challenge_model.dart';
+import 'package:icandoit2021/controllers/challenges_controller.dart';
 
 class ChallengeListBuilder extends StatefulWidget {
+  final Future<List<ChallengeModel>> challengesData;
+  final ChallengesController controller;
+
+  ChallengesListBuilder(
+      {@required this.challengesData, @required this.controller});
   @override
   _ChallengeListBuilderState createState() => _ChallengeListBuilderState();
 }
 
 class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
-  List<ChallengeModel> _challengesList = [
-    ChallengeModel(name: "Challenge1", target: 23, unity: unity_challenge.kg),
-    ChallengeModel(name: "Challenge2", target: 23, unity: unity_challenge.km),
-  ];
   String unityPattern = "unity_challenge.";
 
   @override
   Widget build(BuildContext context) {
+    Future<List<ChallengeModel>> _challengesList = widget.challengesData;
     return ListView.builder(
       itemCount: _challengesList.length,
       itemBuilder: (context, index) {

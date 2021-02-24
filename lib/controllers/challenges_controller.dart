@@ -4,10 +4,30 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/challenge_model.dart';
 
+const String keyAcces = "ChallengesList";
+
 class ChallengesController {
   List<ChallengeModel> _challengesList = [];
+  SharedPreferences _localData;
 
   List<ChallengeModel> getChallenges() {
+    return _challengesList;
+  }
+
+  Future<List<ChallengeModel>> initChallengesList() async {
+    _localData = await SharedPreferences.getInstance();
+    final List<String> _tempList = _localData.getStringList(keyAcces);
+
+    if (_tempList.isNotEmpty) {
+      final List<dynamic> _jsonDecodeList = _tempList
+          .map((challengeEncoded) => jsonDecode(challengeEncoded))
+          .toList();
+
+      _challengesList = _jsonDecodeList
+          .map((challenge) => ChallengeModel.fromJSON(challenge))
+          .toList();
+      print(_challengesList);
+    }
     return _challengesList;
   }
 
@@ -34,13 +54,12 @@ class ChallengesController {
   }
 
   Future<bool> _save() async {
-    SharedPreferences localData = await SharedPreferences.getInstance();
     if (_challengesList.isNotEmpty) {
       List<String> _jsonList = _challengesList
           .map((challenge) => jsonEncode(challenge.toJSON()))
           .toList();
-      print(_jsonList);
-      return localData.setStringList("ChallengesList", _jsonList);
+      //print(_jsonList);
+      return _localData.setStringList(keyAcces, _jsonList);
     }
     return false;
   }
