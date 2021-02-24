@@ -7,7 +7,7 @@ class ChallengeListBuilder extends StatefulWidget {
   final Future<List<ChallengeModel>> challengesData;
   final ChallengesController controller;
 
-  ChallengesListBuilder(
+  ChallengeListBuilder(
       {@required this.challengesData, @required this.controller});
   @override
   _ChallengeListBuilderState createState() => _ChallengeListBuilderState();
