@@ -21,7 +21,8 @@ class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
         return Dismissible(
           confirmDismiss: (direction) {
             if (direction == DismissDirection.startToEnd) {
-              showDialog(context:context,
+              showDialog(
+                context:context,
                 builder :(context), 
               { return AlertDialog(
                 title: Text("test title"),
