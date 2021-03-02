@@ -8,8 +8,8 @@ class ChallengeListBuilder extends StatefulWidget {
 
 class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
   List<ChallengeModel> _challengesList = [
-    ChallengeModel(name: "Challenge01", target: 23, unity: unity_challenge.kg),
-    ChallengeModel(name: "Challenge02", target: 23, unity: unity_challenge.km),
+    ChallengeModel(name: "Challenge1'", target: 23, unity: unity_challenge.kg),
+    ChallengeModel(name: "Challenge2'", target: 23, unity: unity_challenge.km),
   ];
   String unityPattern = "unity_challenge.";
 
