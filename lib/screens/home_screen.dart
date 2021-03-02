@@ -20,6 +20,12 @@ class _HomeState extends State<Home> {
   String targetChallenge;
 
   @override
+  void initState() {
+    _controller.initChallengesList();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,

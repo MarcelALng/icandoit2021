@@ -2,12 +2,34 @@ import 'package:flutter/foundation.dart';
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../models/challenge_model.dart';
+
+const String keyAcess = "ChallengesList";
 
 class ChallengesController {
   List<ChallengeModel> _challengesList = [];
+  SharedPreferences _localData;
 
   List<ChallengeModel> getChallenges() {
+    return _challengesList;
+  }
+
+  Future<List<ChallengeModel>> initChallengesList() async {
+    _localData = await SharedPreferences.getInstance();
+    final List<String> _tempList = _localData.getStringList(keyAcess);
+
+    if (_tempList.isNotEmpty) {
+      final List<dynamic> _jsonDecodeList = _tempList
+          .map((challengeEncoded) => jsonDecode(challengeEncoded))
+          .toList();
+
+      _challengesList = _jsonDecodeList
+          .map((challenge) => ChallengeModel.fromJSON(challenge))
+          .toList();
+
+      print(_challengesList);
+    }
     return _challengesList;
   }
 
@@ -26,9 +48,9 @@ class ChallengesController {
     );
     final bool resultat = await _save(); // save data
     if (resultat) {
-      print("ça marche"); // must be showed in debug console if working
+      // print("ça marche"); // must be showed in debug console if working
     } else {
-      print("ça bug $resultat");
+      // print("ça bug $resultat");
     }
     return getChallenges();
   }
@@ -39,8 +61,8 @@ class ChallengesController {
       List<String> _jsonList = _challengesList
           .map((challenge) => jsonEncode(challenge.toJSON()))
           .toList();
-      print(_jsonList);
-      return localData.setStringList("ChallengesList", _jsonList);
+      // print(_jsonList);
+      return _localData.setStringList(keyAcess, _jsonList);
     }
     return false;
   }
