@@ -20,9 +20,10 @@ class ChallengesController {
     final List<String> _tempList = _localData.getStringList(keyAcess);
 
     if (_tempList.isNotEmpty) {
-      final List<dynamic> _jsonDecodeList = _tempList
+      final List<Map<String, dynamic>> _jsonDecodeList = _tempList
           .map((challengeEncoded) => jsonDecode(challengeEncoded))
-          .toList();
+          .toList()
+          .cast<Map<String, dynamic>>();
 
       _challengesList = _jsonDecodeList
           .map((challenge) => ChallengeModel.fromJSON(challenge))
