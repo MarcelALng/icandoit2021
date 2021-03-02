@@ -26,7 +26,7 @@ class ChallengesController {
     );
     final bool resultat = await _save(); // save data
     if (resultat) {
-      print("ça marche");
+      print("ça marche"); // must be showed in debug console if working
     } else {
       print("ça bug $resultat");
     }
