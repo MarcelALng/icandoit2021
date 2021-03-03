@@ -27,7 +27,16 @@ class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
         builder: (context, AsyncSnapshot<List<ChallengeModel>> data) {
           List<ChallengeModel> _challengesList = data.data;
           if (!data.hasData) {
-            return Text("Pas de challenge créé.");
+            return Container(
+              alignment: Alignment.center,
+              child: Text(
+                "Aucun challenge en cours pourtant tu peux le faire.",
+                style: TextStyle(
+                  color: Colors.orange[600],
+                  fontSize: 18.0,
+                ),
+              ),
+            );
           }
           return ListView.builder(
             itemCount: _challengesList.length,

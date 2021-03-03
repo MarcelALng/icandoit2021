@@ -17,9 +17,10 @@ class ChallengesController {
 
   Future<List<ChallengeModel>> initChallengesList() async {
     _localData = await SharedPreferences.getInstance();
+    _localData.clear();
     final List<String> _tempList = _localData.getStringList(keyAcess);
 
-    if (_tempList.isNotEmpty) {
+    if (_tempList != null) {
       final List<Map<String, dynamic>> _jsonDecodeList = _tempList
           .map((challengeEncoded) => jsonDecode(challengeEncoded))
           .toList()
@@ -57,7 +58,7 @@ class ChallengesController {
   }
 
   Future<bool> _save() async {
-    SharedPreferences localData = await SharedPreferences.getInstance();
+    // SharedPreferences localData = await SharedPreferences.getInstance(); inutile
     if (_challengesList.isNotEmpty) {
       List<String> _jsonList = _challengesList
           .map((challenge) => jsonEncode(challenge.toJSON()))
