@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    _controller.initChallengesList();
+    challengesData = _controller.initChallengesList();
     super.initState();
   }
 
@@ -35,7 +35,9 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
-      body: ChallengeListBuilder(), // Careful to write Challenge or ChallengeS
+      body: ChallengeListBuilder(
+        challengesData: challengesData,
+      ), // Careful to write Challenge or ChallengeS
       backgroundColor: Color(0xff414a4c),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: buildBottomSheet(),

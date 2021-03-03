@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../../models/challenge_model.dart';
 
 class ChallengeListBuilder extends StatefulWidget {
+  final Future<List<ChallengeModel>> challengesData;
+  ChallengeListBuilder({@required this.challengesData});
   @override
   _ChallengeListBuilderState createState() => _ChallengeListBuilderState();
 }
