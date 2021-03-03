@@ -14,7 +14,8 @@ class _HomeState extends State<Home> {
       GlobalKey<ScaffoldState>(); // key which can be use in all application
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
   PersistentBottomSheetController _bottomSheetController;
-  ChallengesController _controller = ChallengesController();
+  final ChallengesController _controller = ChallengesController();
+  Future<List> challengesData;
   String unityChallenge = "KG";
   String nameChallenge;
   String targetChallenge;
@@ -34,7 +35,7 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
-      body: ChallengeListBuilder(),
+      body: ChallengeListBuilder(), // Careful to write Challenge or ChallengeS
       backgroundColor: Color(0xff414a4c),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: buildBottomSheet(),
