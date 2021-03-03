@@ -17,7 +17,7 @@ class ChallengesController {
 
   Future<List<ChallengeModel>> initChallengesList() async {
     _localData = await SharedPreferences.getInstance();
-    _localData.clear();
+    // _localData.clear();
     final List<String> _tempList = _localData.getStringList(keyAcess);
 
     if (_tempList != null) {

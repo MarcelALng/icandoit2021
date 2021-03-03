@@ -36,7 +36,7 @@ class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
             return Container(
               alignment: Alignment.center,
               child: Text(
-                "Aucun challenge en cours pourtant tu peux le faire.",
+                "Aucun challenge en cours pourtant tu peux le faire!!!",
                 style: TextStyle(
                   color: Colors.orange[600],
                   fontSize: 18.0,
@@ -65,6 +65,7 @@ class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
                               actions: <Widget>[
                                 FlatButton(
                                   onPressed: () {
+                                    widget.controller.remove(index: index);
                                     Navigator.pop(context, true);
                                   },
                                   child: Text("oui"),
