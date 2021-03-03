@@ -37,6 +37,7 @@ class _HomeState extends State<Home> {
       ),
       body: ChallengeListBuilder(
         challengesData: challengesData,
+        controller: _controller,
       ), // Careful to write Challenge or ChallengeS
       backgroundColor: Color(0xff414a4c),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
