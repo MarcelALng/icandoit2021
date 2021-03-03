@@ -130,6 +130,7 @@ class _HomeState extends State<Home> {
                               name: nameChallenge,
                               target: targetChallenge,
                               unity: unityChallenge);
+                          Navigator.pop(context);
                         }
                         ;
                       },
