@@ -26,16 +26,23 @@ class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
         future: _challengesList,
         builder: (context, AsyncSnapshot<List<ChallengeModel>> data) {
           List<ChallengeModel> _challengesList = data.data;
+
           if (!data.hasData) {
             return Container(
               alignment: Alignment.center,
-              child: Text(
-                "Aucun challenge en cours pourtant tu peux le faire.",
-                style: TextStyle(
-                  color: Colors.orange[600],
-                  fontSize: 18.0,
-                ),
-              ),
+              child: CircularProgressIndicator(),
+            );
+          } else if (_challengesList.isEmpty) {
+            return Container(
+              alignment: Alignment.center,
+              child: CircularProgressIndicator(),
+              // Text(
+              //   "Aucun challenge en cours pourtant tu peux le faire.",
+              //   style: TextStyle(
+              //     color: Colors.orange[600],
+              //     fontSize: 18.0,
+              //   ),
+              // ),
             );
           }
           return ListView.builder(
