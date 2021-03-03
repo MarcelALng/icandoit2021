@@ -11,9 +11,9 @@ class ChallengesController {
   List<ChallengeModel> _challengesList = [];
   SharedPreferences _localData;
 
-  List<ChallengeModel> getChallenges() {
-    return _challengesList;
-  }
+  // List<ChallengeModel> getChallenges() {
+  //   return _challengesList;
+  // }
 
   Future<List<ChallengeModel>> initChallengesList() async {
     _localData = await SharedPreferences.getInstance();
@@ -48,13 +48,9 @@ class ChallengesController {
             : unity_challenge.km, // ternary operator
       ),
     );
-    final bool resultat = await _save(); // save data
-    if (resultat) {
-      // print("ça marche"); // must be showed in debug console if working
-    } else {
-      // print("ça bug $resultat");
-    }
-    return getChallenges();
+    await _save(); // save data
+
+    return _challengesList;
   }
 
   Future<bool> _save() async {
@@ -67,5 +63,11 @@ class ChallengesController {
       return _localData.setStringList(keyAcess, _jsonList);
     }
     return false;
+  }
+
+  Future<List<ChallengeModel>> remove({@required int index}) async {
+    _challengesList.removeAt(index);
+    await _save();
+    return _challengesList;
   }
 }

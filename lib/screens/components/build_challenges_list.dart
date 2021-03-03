@@ -35,14 +35,14 @@ class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
           } else if (_challengesList.isEmpty) {
             return Container(
               alignment: Alignment.center,
-              child: CircularProgressIndicator(),
-              // Text(
-              //   "Aucun challenge en cours pourtant tu peux le faire.",
-              //   style: TextStyle(
-              //     color: Colors.orange[600],
-              //     fontSize: 18.0,
-              //   ),
-              // ),
+              child: Text(
+                "Aucun challenge en cours pourtant tu peux le faire.",
+                style: TextStyle(
+                  color: Colors.orange[600],
+                  fontSize: 18.0,
+                ),
+                textAlign: TextAlign.center,
+              ),
             );
           }
           return ListView.builder(
