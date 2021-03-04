@@ -53,8 +53,11 @@ class ChallengesController {
     return _challengesList;
   }
 
-  Future<bool> _save() async {
-    // SharedPreferences localData = await SharedPreferences.getInstance(); inutile
+  Future<bool> _save({bool remove}) async {
+    if (remove) {
+      return _localData.setStringList(keyAcess, []);
+    }
+
     if (_challengesList.isNotEmpty) {
       List<String> _jsonList = _challengesList
           .map((challenge) => jsonEncode(challenge.toJSON()))
@@ -67,7 +70,7 @@ class ChallengesController {
 
   Future<List<ChallengeModel>> remove({@required int index}) async {
     _challengesList.removeAt(index);
-    await _save();
+    await _save(remove: true);
     return _challengesList;
   }
 }
