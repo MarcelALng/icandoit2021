@@ -54,7 +54,8 @@ class ChallengesController {
   }
 
   Future<bool> _save({bool remove}) async {
-    if (remove) {
+    if (remove ?? false) {
+      // default value of remove is false
       return _localData.setStringList(keyAcess, []);
     }
 

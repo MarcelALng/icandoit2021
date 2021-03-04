@@ -52,6 +52,14 @@ class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
                 padding:
                     const EdgeInsets.only(bottom: 3.0, left: 8.0, right: 8.0),
                 child: Dismissible(
+                  onDismissed: (direction) {
+                    if (direction == DismissDirection.endToStart) {
+                      widget.controller.remove(index: index);
+                      Scaffold.of(context).showSnackBar(_buildSnackBar(
+                          content:
+                              "Le challenge ${_challengesList[index].name} a bien été validé."));
+                    }
+                  },
                   confirmDismiss: (direction) async {
                     // to confirm delete or not
                     if (direction == DismissDirection.startToEnd) {
@@ -66,6 +74,12 @@ class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
                                 FlatButton(
                                   onPressed: () {
                                     widget.controller.remove(index: index);
+                                    Scaffold.of(context).showSnackBar(
+                                      _buildSnackBar(
+                                        content:
+                                            "Le challenge ${_challengesList[index].name} a bien été supprimé.",
+                                      ),
+                                    );
                                     Navigator.pop(context, true);
                                   },
                                   child: Text("oui"),
@@ -130,5 +144,14 @@ class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
             },
           );
         });
+  }
+
+  SnackBar _buildSnackBar({@required String content}) {
+    return SnackBar(
+      content: Text(
+        content,
+        textAlign: TextAlign.center,
+      ),
+    );
   }
 }
