@@ -54,10 +54,19 @@ class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
                 child: Dismissible(
                   onDismissed: (direction) {
                     if (direction == DismissDirection.endToStart) {
-                      widget.controller.remove(index: index);
                       Scaffold.of(context).showSnackBar(_buildSnackBar(
                           content:
                               "Le challenge ${_challengesList[index].name} a bien été validé."));
+                      widget.controller.remove(index: index);
+                    }
+                    if (direction == DismissDirection.startToEnd) {
+                      Scaffold.of(context).showSnackBar(
+                        _buildSnackBar(
+                          content:
+                              "Le challenge ${_challengesList[index].name} a bien été supprimé.",
+                        ),
+                      );
+                      widget.controller.remove(index: index);
                     }
                   },
                   confirmDismiss: (direction) async {
@@ -73,13 +82,6 @@ class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
                               actions: <Widget>[
                                 FlatButton(
                                   onPressed: () {
-                                    widget.controller.remove(index: index);
-                                    Scaffold.of(context).showSnackBar(
-                                      _buildSnackBar(
-                                        content:
-                                            "Le challenge ${_challengesList[index].name} a bien été supprimé.",
-                                      ),
-                                    );
                                     Navigator.pop(context, true);
                                   },
                                   child: Text("oui"),

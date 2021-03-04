@@ -69,9 +69,8 @@ class ChallengesController {
     return false;
   }
 
-  Future<List<ChallengeModel>> remove({@required int index}) async {
+  void remove({@required int index}) async {
     _challengesList.removeAt(index);
     await _save(remove: true);
-    return _challengesList;
   }
 }
