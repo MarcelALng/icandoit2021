@@ -6,19 +6,15 @@ import '../../models/challenge_model.dart';
 
 import 'package:icandoit2021/controllers/challenges_controller.dart';
 
-class ChallengeListBuilder extends StatefulWidget {
-  @override
-  _ChallengeListBuilderState createState() => _ChallengeListBuilderState();
-}
-
-class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
-  String unityPattern = "unity_challenge.";
+class ChallengeListBuilder extends StatelessWidget {
+  final String unityPattern = "unity_challenge.";
 
   @override
   Widget build(BuildContext context) {
     List<ChallengeModel> _challengesList =
         Provider.of<ChallengesController>(context).getChallenges();
-
+    final ChallengesController provider =
+        Provider.of<ChallengesController>(context);
     if (_challengesList.isEmpty) {
       return Container(
         alignment: Alignment.center,
@@ -43,7 +39,7 @@ class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
                     content:
                         "Le challenge ${_challengesList[index].name} a bien été validé."));
-                // widget.controller.remove(index: index);
+                provider.remove(index: index);
               }
               if (direction == DismissDirection.startToEnd) {
                 Scaffold.of(context).showSnackBar(
@@ -52,7 +48,7 @@ class _ChallengeListBuilderState extends State<ChallengeListBuilder> {
                         "Le challenge ${_challengesList[index].name} a bien été supprimé.",
                   ),
                 );
-                //  widget.controller.remove(index: index);
+                provider.remove(index: index);
               }
             },
             confirmDismiss: (direction) async {

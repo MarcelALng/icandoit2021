@@ -16,7 +16,6 @@ class _HomeState extends State<Home> {
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
   PersistentBottomSheetController _bottomSheetController;
 
-  Future<List> challengesData;
   String unityChallenge = "KG";
   String nameChallenge;
   String targetChallenge;
@@ -127,7 +126,6 @@ class _HomeState extends State<Home> {
 
                           Navigator.pop(context);
                         }
-                        ;
                       },
                       child: Text("Ajouter challenge"),
                     ),
