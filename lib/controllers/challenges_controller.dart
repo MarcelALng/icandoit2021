@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
+import 'dart:collection';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -7,15 +8,19 @@ import '../models/challenge_model.dart';
 
 const String keyAcess = "ChallengesList";
 
-class ChallengesController {
+class ChallengesController extends ChangeNotifier {
   List<ChallengeModel> _challengesList = [];
   SharedPreferences _localData;
 
-  // List<ChallengeModel> getChallenges() {
-  //   return _challengesList;
-  // }
+  ChallengesController() {
+    _initChallengesList();
+  }
+  List<ChallengeModel> getChallenges() {
+    return UnmodifiableListView(
+        _challengesList); // to protect _challenges List & need dart:collection
+  }
 
-  Future<List<ChallengeModel>> initChallengesList() async {
+  void _initChallengesList() async {
     _localData = await SharedPreferences.getInstance();
     // _localData.clear();
     final List<String> _tempList = _localData.getStringList(keyAcess);
@@ -32,10 +37,11 @@ class ChallengesController {
 
       print(_challengesList);
     }
-    return _challengesList;
+    notifyListeners();
+    // return _challengesList;
   }
 
-  Future<List<ChallengeModel>> addChallenge(
+  void addChallenge(
       {@required String name,
       @required String target,
       @required String unity}) async {
@@ -49,8 +55,7 @@ class ChallengesController {
       ),
     );
     await _save(); // save data
-
-    return _challengesList;
+    notifyListeners();
   }
 
   Future<bool> _save({bool remove}) async {
