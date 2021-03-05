@@ -12,3 +12,4 @@ git clone https://github.com/MarcelALng/icandoit2021.git
 
 https://user-images.githubusercontent.com/43136183/110057236-88c6e280-7d60-11eb-9148-b86d6b143556.mov
 
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/D6N0Kn813dQ)
