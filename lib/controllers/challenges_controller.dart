@@ -59,7 +59,7 @@ class ChallengesController extends ChangeNotifier {
   }
 
   Future<bool> _save({bool remove}) async {
-    if (remove ?? false) {
+    if (_challengesList.length < 1 && remove ?? false) {
       // default value of remove is false
       return _localData.setStringList(keyAcess, []);
     }
@@ -77,5 +77,6 @@ class ChallengesController extends ChangeNotifier {
   void remove({@required int index}) async {
     _challengesList.removeAt(index);
     await _save(remove: true);
+    notifyListeners();
   }
 }
